@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import Child1 from "./components/Child1";
+import { UseCountContext } from "./context/UseCountContext";
 
 function App() {
+  const [count, setcount] = useState(0);
+
+  const incrementHandler = () => {
+    setcount(count + 1);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <UseCountContext.Provider value={count}>
+      <div className="App">
+        <Child1 nimadir={count} />
+
+        <div>
+          <h1>{count}</h1>
+          <button onClick={incrementHandler}>Increment</button>
+        </div>
+      </div>
+    </UseCountContext.Provider>
   );
 }
 
